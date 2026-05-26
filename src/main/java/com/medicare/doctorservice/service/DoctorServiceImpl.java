@@ -52,5 +52,9 @@ public class DoctorServiceImpl implements DoctorService{
 
 	    return doctorRepository.save(existingDoctor);
 	}
+	@Override
+	public Doctor getDoctorById(Long id) {
+		return doctorRepository.findById(id).orElseThrow(()->new RuntimeException("Doctor not found"));
+	}
 
 }

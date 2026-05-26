@@ -16,6 +16,8 @@ import com.medicare.doctorservice.dto.DoctorDto;
 import com.medicare.doctorservice.entity.Doctor;
 import com.medicare.doctorservice.service.DoctorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
@@ -24,7 +26,8 @@ public class DoctorController {
 	private DoctorService doctorService;
 
 	@PostMapping
-	public Doctor saveDoctor(@RequestBody DoctorDto doctorDto) {
+	@Valid
+	public Doctor saveDoctor(@Valid @RequestBody DoctorDto doctorDto) {
 		return doctorService.saveDoctor(doctorDto);
 	}
 
@@ -42,5 +45,9 @@ public class DoctorController {
 	@PutMapping("/{id}")
 	public Doctor updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
 		return doctorService.updateDoctor(id, doctor);
+	}
+	@GetMapping("/{id}")
+	public Doctor getByDoctorId(@PathVariable Long id) {
+		return doctorService.getDoctorById(id);
 	}
 }
